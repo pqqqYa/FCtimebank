@@ -1,0 +1,97 @@
+{
+	"pages": [
+		"pages/hp/hp",
+		"pages/acList/acList",
+		"pages/mine/mine",
+		"pages/addAc/addAc",
+		"pages/login/login",
+		"pages/activityInfo/activityInfo",
+		"pages/checkActivity/checkActivity",
+		"pages/userInfo/userInfo",
+		"pages/searchPages/searchPages",
+		"pages/txn/txn",
+		"pages/notice/notice",
+		"pages/train/train",
+		"pages/trainInfo/trainInfo",
+		"pages/PayPic/Paypic",
+		"pages/ServicePic/ServicePic"
+	],
+	"tabBar": {
+		"custom": false,
+		"selectedColor": "#2e54a1",
+		"borderStyle": "white",
+		"position": "bottom",
+		"list": [
+			{
+				"pagePath": "pages/hp/hp",
+				"text": "首页",
+				"iconPath": "/images/hp-0.png",
+				"selectedIconPath": "/images/hp-1.png"
+			},
+			{
+				"pagePath": "pages/acList/acList",
+				"text": "活动",
+				"iconPath": "/images/list-0.png",
+				"selectedIconPath": "/images/list-1.png"
+			},
+			{
+				"pagePath": "pages/train/train",
+				"text": "培训",
+				"iconPath": "/images/order_unread-0.png",
+				"selectedIconPath": "/images/order_unread-1.png"
+			},
+			{
+				"pagePath": "pages/mine/mine",
+				"text": "我的",
+				"iconPath": "/images/sub_account-0.png",
+				"selectedIconPath": "/images/sub_account-1.png"
+			}
+		]
+	},
+	"window": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "帆长时间银行",
+		"navigationBarBackgroundColor": "#ffffff"
+	},
+	"componentFramework": "glass-easel",
+	"sitemapLocation": "sitemap.json",
+	"lazyCodeLoading": "requiredComponents",
+	"usingComponents": {
+		"van-action-sheet": "@vant/weapp/action-sheet/index",
+		"van-calendar": "@vant/weapp/calendar/index",
+		"van-cascader": "@vant/weapp/cascader/index",
+		"van-cell": "@vant/weapp/cell/index",
+		"van-cell-group": "@vant/weapp/cell-group/index",
+		"van-col": "@vant/weapp/col/index",
+		"van-collapse": "@vant/weapp/collapse/index",
+		"van-collapse-item": "@vant/weapp/collapse-item/index",
+		"van-datetime-picker": "@vant/weapp/datetime-picker/index",
+		"van-dialog": "@vant/weapp/dialog/index",
+		"van-divider": "@vant/weapp/divider/index",
+		"van-empty": "@vant/weapp/empty/index",
+		"van-field": "@vant/weapp/field/index",
+		"van-grid": "@vant/weapp/grid/index",
+		"van-grid-item": "@vant/weapp/grid-item/index",
+		"van-icon": "@vant/weapp/icon/index",
+		"van-image": "@vant/weapp/image/index",
+		"van-popup": "@vant/weapp/popup/index",
+		"van-row": "@vant/weapp/row/index",
+		"van-search": "@vant/weapp/search/index",
+		"van-stepper": "@vant/weapp/stepper/index",
+		"van-tab": "@vant/weapp/tab/index",
+		"van-tabs": "@vant/weapp/tabs/index",
+		"van-tag": "@vant/weapp/tag/index",
+		"van-toast": "@vant/weapp/toast/index",
+		"van-uploader": "@vant/weapp/uploader/index",
+		"van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+		"van-dropdown-item": "@vant/weapp/dropdown-item/index",
+		"van-sticky": "@vant/weapp/sticky/index",
+		"van-steps": "@vant/weapp/steps/index",
+		"van-rate": "@vant/weapp/rate/index",
+		"van-button": "@vant/weapp/button/index",
+		"van-count-down": "@vant/weapp/count-down/index"
+	},
+	"miniApp": {
+		"useAuthorizePage": true
+	}
+}

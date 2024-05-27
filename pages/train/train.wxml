@@ -1,0 +1,77 @@
+<van-sticky>
+<view style="height: {{navBarHeight}}px;background-color: white;">
+</view>
+<view style="height: {{navBarHeight}}px;background-color: white;position:fixed; top:0;width: 750rpx;">
+  <view style="height: {{menuTop-10}}px;background-color: white;"></view>
+  <van-search 
+    model:value="{{ mytext }}"
+    placeholder="搜索活动" 
+    use-action-slot 
+    shape="round"
+    bind:click-input="toSearch"
+    bind:clear="toList1"
+    bind:blur="toList2"
+    bind:change="inSearch"
+  >
+    <view slot="action" style="width: {{menuLeft}}px;">
+    </view>
+  </van-search>
+</view>
+<view>
+  <van-dropdown-menu active-color="#2e54a1">
+    <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}" bind:change="change1"/>
+    <van-dropdown-item value="{{ value2 }}" options="{{ option2 }}" bind:change="change2"/>
+  </van-dropdown-menu>
+</view>
+</van-sticky>
+
+<wxs src="./trainSearch.wxs" module="trainSearch" />
+<wxs src="./trainChange1.wxs" module="trainChange1" />
+
+<view wx:if="{{isSearch ^ !inSearch}}">
+  <view 
+      wx:for="{{trainSearch(fakeTrainList,mytext)}}" 
+      wx:for="{{trainChange1(trainSearch(fakeTrainList,mytext),text1)}}" 
+      wx:key="index" 
+      bind:tap="totrainInfo" 
+      data-id="{{item.id}}"
+      data-adminid="{{item.AdminID}}" 
+      data-name="{{item.name}}"
+      data-type="{{item.type}}"
+      data-nop="{{item.nop}}"
+      data-atime="{{item.aTime}}"
+      data-ctime="{{item.cTime}}"
+      data-address="{{item.address}}"
+      data-price="{{item.price}}"
+      data-principal="{{item.principal}}"
+      data-tel="{{item.tel}}"
+      data-img="{{item.img}}"
+      data-int="{{item.int}}"
+      data-participant="{{item.participant}}"
+      data-isfull="{{item.isfull}}"
+      data-state="{{item.state}}"
+      class="box"
+      >
+      <image src="{{item.img}}" mode="widthFix"/>
+          <view style="height: 20rpx;"></view>
+          <view style=" height: 75rpx;display: flex;flex-direction: row;border: 1px solid white;width: 446rpx;">
+            <view style="border: 1px solid white;width: 348rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap ">
+              <text style="font-size: 40rpx;font-weight: 550;">{{item.name}}</text>
+            </view>
+            <view style="width: 110rpx;display: flex;flex-direction: column;align-items: center;">
+              <van-tag round  type="success" wx:if="{{item.isfull==0}}">报名中</van-tag>
+              <van-tag round  type="warning" wx:if="{{item.isfull==1}}">已满</van-tag>    
+              <van-tag round  type="warning" wx:if="{{item.isfull==2}}">已结束</van-tag>
+            </view>
+          </view>
+          <view style="height: 42rpx;background-color: white;">
+            <text style="color: #808080;font-size:25rpx;height: 30rpx;">培训导师：{{item.principal}}</text>
+          </view>
+          <view style="height: 42rpx;background-color: white;">
+            <text style="color: #808080;font-size:25rpx;height: 30rpx;">{{item.aTime}}</text>
+          </view>
+          <view style="width:420rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+            <text style="color: #808080;font-size: 25rpx;height: 30rpx;">{{item.address}}</text>
+          </view>
+        </view>
+</view>

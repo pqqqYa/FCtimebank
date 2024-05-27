@@ -1,0 +1,18 @@
+/* pages/addAc/addAc.wxss */
+/* pages/mine/mine.wxss */
+.box{
+  display: flex;
+  justify-content: center;
+  background-color: white;
+}
+.box1{
+  margin: 30rpx;
+  height: 60rpx;
+  width: 300rpx;
+  border: 1px solid gainsboro;
+  border-radius: 30rpx;
+  text-align: center;
+}
+page{
+  background-color: #ffffff;
+}

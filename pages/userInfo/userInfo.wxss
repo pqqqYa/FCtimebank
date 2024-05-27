@@ -1,0 +1,14 @@
+/* pages/userInfo/userInfo.wxss */
+.Box{
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  margin: 32rpx;
+  border-radius: 15rpx;
+  
+}
+.Box text{
+  font-size: 35rpx;
+  color: 	#696969;
+  margin: 15rpx;
+}

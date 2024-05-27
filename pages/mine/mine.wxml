@@ -1,0 +1,209 @@
+<view style="height: {{menuTop}}px;"></view>
+
+<navigator wx:if="{{!isLogin}}" url="/pages/login/login" hover-class="none">
+  <view  class="box">
+    <image src="{{userImg}}" mode="aspectFill" />
+  </view>
+  <view  class="box">
+    <text>{{userName}}</text>
+  </view>
+</navigator>
+
+<navigator wx:if="{{isLogin}}" url="/pages/userInfo/userInfo" hover-class="none">
+  <view  class="box">
+    <image src="{{userImg}}" mode="aspectFill" />
+  </view>
+  <view  class="box">
+    <text style="font-size:50rpx;font-weight:540;">{{userName}}</text>
+  </view>
+</navigator>
+
+<view style="display: flex;justify-content: center;">
+  <view style="height: 100rpx;width: 688rpx;border-radius: 16rpx;display: flex;justify-content: center;background-color: white;">
+    <view class="box2" bind:tap="showOngoingEvent">
+      <text style="font-size: 24rpx;color: #808080;">积分</text>
+      <text style="font-size: 40rpx;">{{timeNum}}</text>
+    </view>
+    <view style="width: 25rpx;"/>
+    <view class="box2" bind:tap="showOngoingEvent">
+      <text style="font-size: 24rpx;color: #808080;">时间币</text>
+      <text style="font-size: 40rpx;">{{timeCoinNum}}</text>
+    </view>
+    <view style="width: 25rpx;"/>
+    <view class="box2" bind:tap="showDutyEvent">
+      <text style="font-size: 24rpx;color: #808080;">评级</text>
+      <text style="font-size: 40rpx;">{{userScore}}</text>
+    </view>
+    <view style="width: 25rpx;"/>
+    <view class="box2" bind:tap="toNotice">
+      <text style="font-size: 24rpx;color: #808080;">活动数量</text>
+      <text style="font-size: 40rpx;">{{activityNum}}</text>
+    </view>
+  </view>
+</view>
+
+<view style="height: 15rpx;"/>
+
+<view style="display: flex;justify-content: center;">
+  <view style="height: 150rpx;width: 688rpx;border-radius: 16rpx;display: flex;justify-content: center;background-color: white;">
+    <view class="box3" bind:tap="showOngoingEvent">
+      <view style="margin: 15rpx;">
+        <van-icon name="underway-o" size="60rpx"/>
+      </view>
+      <text style="font-size: 24rpx;">正在</text>
+    </view>
+    <view style="width: 25rpx;"/>
+    <view class="box3" bind:tap="showPastEvent">
+      <view style="margin: 15rpx;">
+        <van-icon name="friends-o" size="60rpx"/>
+      </view>
+      <text style="font-size: 24rpx;">完成</text>
+    </view>
+    <view style="width: 25rpx;"/>
+    <view class="box3" bind:tap="showDutyEvent">
+      <view style="margin: 15rpx;">
+        <van-icon name="certificate" size="60rpx"/>
+      </view>
+      <text style="font-size: 24rpx;">管理</text>
+    </view>
+    <view style="width: 25rpx;"/>
+    <view class="box3" bind:tap="toNotice">
+      <view style="margin: 15rpx;">
+        <van-icon name="chat-o" size="60rpx"/>
+      </view>
+      <text style="font-size: 24rpx;">通知</text>
+    </view>
+  </view>
+</view>
+<view style="height: 15rpx;"/>
+    <van-popup show="{{ showOngoingEvent }}" bind:close="closeOngoingEvent" round position="bottom" custom-style="height: 80%" >
+      <view 
+      wx:for="{{ongoingEvent}}" 
+      wx:key="index" 
+      bind:tap="toCheckActivity" 
+      data-id="{{item.id}}"
+      data-adminid="{{item.AdminID}}" 
+      data-name="{{item.name}}"
+      data-type="{{item.type}}"
+      data-nop="{{item.nop}}"
+      data-atime="{{item.aTime}}"
+      data-ctime="{{item.cTime}}"
+      data-address="{{item.address}}"
+      data-price="{{item.price}}"
+      data-principal="{{item.principal}}"
+      data-tel="{{item.tel}}"
+      data-img="{{item.img}}"
+      data-int="{{item.int}}"
+      data-participant="{{item.participant}}"
+      data-state="{{item.state}}"
+      >
+        <van-cell value="{{item.aTime}}">
+          <view slot="title" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+            <text class="van-cell-text" style="margin: 10rpx;">{{item.name}}</text>
+            <van-tag type="success" wx:if="{{item.state == 2}}">报名中</van-tag>
+            <van-tag type="success" wx:if="{{item.state == 4}}">活动中</van-tag>
+          </view>
+        </van-cell>
+      </view>
+      <view wx:if="{{ongoingEvent.length==0 && isLogin}}"><van-empty description="暂无记录" /></view>
+      <view wx:if="{{!isLogin}}"><van-empty description="登陆后查看" /></view>
+  </van-popup>
+    <van-popup show="{{ showPastEvent }}" bind:close="closePastEvent" round position="bottom" custom-style="height: 80%" >
+      <view 
+      wx:for="{{pastEvent}}" 
+      wx:key="index" bind:tap="toCheckActivity" 
+      data-id="{{item.id}}"
+      data-adminid="{{item.AdminID}}" 
+      data-name="{{item.name}}"
+      data-type="{{item.type}}"
+      data-nop="{{item.nop}}"
+      data-atime="{{item.aTime}}"
+      data-ctime="{{item.cTime}}"
+      data-address="{{item.address}}"
+      data-price="{{item.price}}"
+      data-principal="{{item.principal}}"
+      data-tel="{{item.tel}}"
+      data-img="{{item.img}}"
+      data-int="{{item.int}}"
+      data-participant="{{item.participant}}"
+      data-state="{{item.state}}"
+      >
+      <van-cell value="{{item.aTime}}">
+        <view slot="title" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+            <text class="van-cell-text" style="margin: 10rpx;">{{item.name}}</text>
+            <van-tag type="warning" wx:if="{{item.state == 5}}">等待完结</van-tag>
+            <van-tag type="warning" wx:if="{{item.state == 6}}">活动结束</van-tag>
+          </view>
+        </van-cell>
+      </view>
+      <view wx:if="{{pastEvent.length==0 && isLogin}}"><van-empty description="暂无记录" /></view>
+      <view wx:if="{{!isLogin}}"><van-empty description="登陆后查看" /></view>
+    </van-popup>
+    <van-popup show="{{ showDutyEvent }}" bind:close="closeDutyEvent" round position="bottom" custom-style="height: 80%" >
+      <view 
+      wx:for="{{dutyEvent}}" 
+      wx:key="index" bind:tap="toCheckActivity" 
+      data-id="{{item.id}}"
+      data-adminid="{{item.AdminID}}" 
+      data-name="{{item.name}}"
+      data-type="{{item.type}}"
+      data-nop="{{item.nop}}"
+      data-atime="{{item.aTime}}"
+      data-ctime="{{item.cTime}}"
+      data-address="{{item.address}}"
+      data-price="{{item.price}}"
+      data-principal="{{item.principal}}"
+      data-tel="{{item.tel}}"
+      data-img="{{item.img}}"
+      data-int="{{item.int}}"
+      data-participant="{{item.participant}}"
+      data-state="{{item.state}}"
+      >
+      <van-cell value="{{item.aTime}}">
+          <view slot="title" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+            <text class="van-cell-text" style="margin: 10rpx;">{{item.name}}</text>
+            <van-tag type="primary" wx:if="{{item.state == 1}}">审核中</van-tag>
+            <van-tag type="success" wx:if="{{item.state == 2}}">报名中</van-tag>
+            <van-tag type="success" wx:if="{{item.state == 4}}">活动中</van-tag>
+            <van-tag type="warning" wx:if="{{item.state == 5}}">等待完结</van-tag>
+            <van-tag type="warning" wx:if="{{item.state == 6}}">活动结束</van-tag>
+            
+          </view>
+        </van-cell>
+      </view>
+        <view wx:if="{{dutyEvent.length==0 && isLogin}}"><van-empty description="暂无记录" /></view>
+        <view wx:if="{{!isLogin}}"><van-empty description="登陆后查看" /></view>
+    </van-popup>
+<van-toast id="van-toast" />
+
+<van-cell-group inset>
+  <van-cell title="时间币账单" is-link bind:click="showTradeHistory"/>
+  <van-popup show="{{ showTradeHistory }}" bind:close="closeTradeHistory" round position="bottom" custom-style="height: 80%" >
+    <view 
+      wx:for="{{tradeHistory}}" 
+      wx:key="index" bind:tap="toTXN"
+      data-img="{{item.img}}"
+      data-income="{{item.income}}"
+      data-num="{{item.num}}"
+      data-state="{{item.state}}"
+      data-time="{{item.time}}"
+      data-name="{{item.name}}"
+      data-payer="{{item.payer}}"
+      data-payee="{{item.payee}}"
+      data-tdn="{{item.tdn}}"
+    >
+      <van-cell title="{{item.name}}" value="{{item.income}}{{item.num}}" label="{{item.time}}"/>
+    </view>
+    <view wx:if="{{!isLogin}}">
+      <van-empty description="登陆后查看" />
+    </view>
+  </van-popup>
+
+  <van-cell title="账单分析" is-link bind:click="toPaypic"/>
+  <van-cell title="活动分析" is-link bind:click="toServicePic"/>
+  <van-cell title="问题反馈" is-link/>
+  <van-cell title="服务证明" is-link/>
+  <van-cell title="年度报告" is-link/>
+  <van-cell title="关于我们" is-link/>
+  <van-cell title="账号设置" is-link/>
+</van-cell-group>

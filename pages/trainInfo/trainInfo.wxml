@@ -1,0 +1,46 @@
+
+<image mode="widthFix" style="width: 750rpx;" src="{{img}}"/>
+
+<view>
+  <view class="box">
+    <text style="font-size: 40rpx;">{{name}}</text>
+  </view>
+  <view wx:if="{{isfull==0}}">
+    <button class="box box1" bind:tap="bindtap"><text style="font-size: 22rpx;color: white;">立刻报名</text></button>
+  </view>
+  <view wx:if="{{isfull==1}}">
+    <button class="box box1" bind:tap="bindtap"><text style="font-size: 22rpx;color: white;">参与人数已满</text></button>
+  </view>
+  <view wx:if="{{isfull==2}}">
+    <button class="box box1" bind:tap="bindtap"><text style="font-size: 22rpx;color: white;">活动已经结束</text></button>
+  </view>
+</view>
+
+<van-cell title="培训状态" icon="todo-list-o" label="{{stateText}}" bind:click="showState"/>
+<van-popup show="{{ showState }}" bind:close="closeState" position="left" round custom-style="height: 80%">
+  <view style="width: 300rpx;">
+    <van-steps steps="{{ steps }}" active="{{ state }}" direction="vertical" active-color="#2e54a1" />
+  </view>
+</van-popup>
+<van-cell title="培训导师" icon="manager-o" label="{{principal}}"/>
+<van-cell title="联系方式" icon="comment-o" label="{{tel}}"/>
+<van-cell title="参与人数" icon="friends-o" use-label-slot>
+  <view slot="label">
+    {{nop}}人（剩余名额{{nop-participant.length-logTime}}人）
+  </view>
+</van-cell>
+<van-cell title="培训类型" icon="star-o" label="{{type}}"/>
+<van-cell title="培训时间" icon="underway-o" label="{{aTime}}"/>
+<van-cell title="开展时间" icon="underway-o" label="{{cTime}}"/>
+<van-cell title="培训地点" icon="location-o" label="{{address}}"/>
+<van-cell title="培训介绍" icon="label-o" label="{{int}}"/>
+
+
+<view class="service">
+  <view style="position: absolute;right: 50rpx;"><van-icon name="service-o"size="60rpx" bind:click="openService"/></view>
+</view>
+
+<van-toast id="van-toast" />
+
+<view class="fixed-bottom" style="padding-bottom:{{bottomLift}}px">
+</view>

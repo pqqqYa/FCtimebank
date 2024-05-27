@@ -1,0 +1,45 @@
+/* pages/notice/notice.wxss */
+.box{
+  display: block;
+  border: 1px solid white;
+  border-radius: 20rpx;
+  padding: 5rpx;
+  height: 180rpx;
+  width: 700rpx;
+  background-color: white;
+  box-shadow: 0 0 20rpx rgba(0, 0, 0, 0.15);
+  margin: 15rpx;
+}
+.box image{
+  width: 165rpx;
+  float: left;
+  border-radius: 20rpx;
+  margin: 10rpx;
+}
+
+.starBox{
+  display: flex;
+  justify-content: center;
+  margin: 62.5rpx;
+  border-radius: 15rpx;
+  width: 250rpx;
+}
+.starBox text{
+  font-size: 35rpx;
+  color: 	#ffffff;
+  margin: 15rpx;
+}
+
+.backBox{
+  display: flex;
+  justify-content: center;
+  background-color: #2d85f0;
+  margin: 62.5rpx;
+  border-radius: 15rpx;
+  width: 250rpx;
+}
+.backBox text{
+  font-size: 35rpx;
+  color: 	#ffffff;
+  margin: 15rpx;
+}

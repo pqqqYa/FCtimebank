@@ -1,0 +1,19 @@
+/* pages/acList/acList.wxss */
+.box{
+  display: block;
+  border: 1px solid white;
+  border-radius: 20rpx;
+  padding: 5rpx;
+  height: 250rpx;
+  width: 700rpx;
+  background-color: white;
+  box-shadow: 0 0 20rpx rgba(0, 0, 0, 0.15);
+  margin: 20rpx;
+}
+.box image{
+  width: 230rpx;
+  float: left;
+  border-radius: 20rpx;
+  margin: 10rpx;
+}
+

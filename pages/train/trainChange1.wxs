@@ -1,0 +1,6 @@
+function trainChange1(list,Text){
+  return list.filter(function(item){
+    return item.type.indexOf(Text)>-1
+  })
+}
+module.exports = trainChange1

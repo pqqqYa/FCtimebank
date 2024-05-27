@@ -1,0 +1,71 @@
+<!--pages/txn/txn.wxml-->
+<view style="height: 20px;"></view>
+<view style="background-color: white;">
+  <view style="height: 60rpx;"></view>
+  <view class="box">
+    <image src="{{img}}" mode="aspectFill"/>
+  </view>
+  <view class="box">
+    <text>{{name}}</text>
+  </view>
+  <view class="box" style="margin: 25rpx;">
+    <text style="font-size: 60rpx;font-weight: 540;">{{income}}{{num}}</text>
+  </view>
+  <view style="background-color: white;height: 35rpx;"></view>
+  <van-cell title="" value="" />
+  <van-cell title="当前状态" value="{{state_b}}" />
+  <van-cell title="支付时间" value="{{time}}" />
+  <van-cell title="付款方" value="{{payer}}" />
+  <van-cell title="收款方" value="{{payee}}" />
+  <van-cell title="交易单号" value="{{tdn}}" />
+</view>
+<view style="height: 15rpx;"></view>
+<van-cell title="账单服务"/>
+<van-cell title="对订单有疑惑" icon="question-o" bind:tap="question"/>
+
+<van-popup 
+  closeable
+  show="{{ showquestion }}" 
+  bind:close="closequestion" 
+  round 
+  position="bottom" 
+  custom-style="height: 80%" 
+>
+  <view style="display: flex;justify-content: center;margin: 30rpx;">
+    <text>订单问题反馈</text> 
+  </view>
+    <van-field
+    value="{{ fieldValue }}"
+    is-link
+    readonly
+    label="问题类型"
+    placeholder="请选择问题类型"
+    bind:tap="clickType"
+  />
+  <van-popup show="{{ showType }}" round position="bottom" >
+    <van-cascader
+      wx:if="{{ showType }}"
+      value="{{ type }}"
+      title="请选择问题类型"
+      options="{{ options }}"
+      bind:close="closeType"
+      bind:finish="finishType"
+    />
+  </van-popup>
+  <van-cell-group>
+  <van-field
+    model:value="{{ message }}"
+    type="textarea"
+    placeholder="请具体描述您的遇到的问题"
+    autosize
+    border="{{false}}"
+  />
+  </van-cell-group>
+  <view style="position:fixed;bottom:0;width:100%">
+  <view class="backBox" bind:tap="closequestion_b">
+    <text>提交反馈</text> 
+  </view>
+  <view style="height: 50rpx;"></view>
+</view>
+</van-popup>
+<van-toast id="van-toast" duration="4000"/>

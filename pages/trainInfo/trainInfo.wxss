@@ -1,0 +1,46 @@
+
+.box{
+  display: flex;
+  justify-content: center;
+  margin: 30rpx;
+}
+.box1{
+  background-color: #f4433c;
+  border-radius: 30rpx;
+  height: 60rpx;
+}
+page{
+  background-color: #ffffff;
+}
+.fixed-bottom{
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  padding: 20rpx;
+  background-color: #ffffff;
+  width: 710rpx;
+  left: 0;
+  bottom: 0;
+}
+.service{
+  display: flex;
+  align-items: center;
+  position: fixed;
+  width: 750rpx;
+  height: 200rpx;
+  left: 0;
+  bottom: 0;
+}
+
+.backBox{
+  display: flex;
+  justify-content: center;
+  background-color: #2d85f0;
+  margin: 32rpx;
+  border-radius: 15rpx;
+}
+.backBox text{
+  font-size: 35rpx;
+  color: 	#ffffff;
+  margin: 15rpx;
+}

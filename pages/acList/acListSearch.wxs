@@ -1,0 +1,6 @@
+function trainSearch(list,myText){
+  return list.filter(function(item){
+    return item.name.indexOf(myText)>-1
+  })
+}
+module.exports = trainSearch

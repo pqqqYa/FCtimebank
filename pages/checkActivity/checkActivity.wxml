@@ -1,0 +1,237 @@
+<!--pages/activityInfo/activityInfo.wxml-->
+<image mode="widthFix" style="width: 750rpx;" src="{{img}}"/>
+<view>
+  <view class="box"><text style="font-size: 40rpx;">{{name}}</text></view>
+  <van-divider contentPosition="center">详细信息</van-divider>
+</view>
+<van-cell title="活动状态" icon="todo-list-o" label="{{stateText}}" bind:click="showState"/>
+<van-popup show="{{ showState }}" bind:close="closeState" position="left" round custom-style="height: 80%">
+  <view style="width: 300rpx;" wx:if="{{userID===AdminID}}">
+    <van-steps steps="{{ steps1 }}" active="{{ state }}" direction="vertical" active-color="#2e54a1" />
+  </view>
+  <view style="width: 300rpx;" wx:if="{{userID!==AdminID}}">
+    <van-steps steps="{{ steps2 }}" active="{{ state }}" direction="vertical" active-color="#2e54a1" />
+  </view>
+</van-popup>
+<van-cell title="时间币报酬" icon="diamond-o" label="{{price}}"/>
+<van-cell title="参与人数" icon="friends-o" use-label-slot>
+  <view slot="label">
+    {{nop}}人（剩余名额2人）
+  </view>
+</van-cell>
+<van-cell title="活动类型" icon="star-o" label="{{type}}"/>
+<van-cell title="活动时间" icon="underway-o" label="{{aTime}}"/>
+<van-cell title="开展时间" icon="underway-o" label="{{cTime}}"/>
+<van-cell title="活动地区" icon="location-o" label="{{address}}"/>
+<van-cell title="活动介绍" icon="label-o" label="{{int}}"/>
+<van-cell title="负责人" icon="manager-o" label="{{principal}}"/>
+<van-cell title="联系方式" icon="phone-o" label="{{tel}}"/>
+<view wx:if="{{state == '5' || state == '6'}}">
+  <view wx:if="{{userID!==AdminID}}">
+    <van-cell title="活动反馈" icon="envelop-o" is-link bind:click="showEvaluate"/>
+    <van-popup show="{{ showEvaluate }}" bind:close="closeEvaluate" round position="bottom" custom-style="height: 80%">
+      <van-cell title="评分">
+        <van-rate slot="right-icon" value="{{starNum}}" bind:change="changestarNum" color="#ffd21e"/>
+      </van-cell>
+      <van-cell-group>
+        <van-field
+        model:value="{{ evaluate }}"
+          placeholder="请输入评价"
+          border="{{ false }}"
+          bind:change="changeEvaluate"
+          autosize
+          type="textarea"
+        />
+      </van-cell-group>
+      <view class="delBox" bind:tap="delEvaluate" style="background-color: #2e54a1;width:686rpx;position:fixed; bottom:20rpx;">
+      <text>提交评价</text>
+      </view>
+    </van-popup>
+  </view>
+</view>
+
+
+<view wx:if="{{userID===AdminID}}">
+  <van-divider contentPosition="center">活动管理</van-divider>
+
+  <van-cell title="活动录取" icon="description-o" is-link bind:click="showEnroll"/>
+  <van-popup show="{{ showEnroll }}" bind:close="closeEnroll" round position="bottom" custom-style="height: 80%">
+    <view wx:for="{{participant}}" wx:key="index">
+      <van-cell title="{{item.userName}}" bind:tap="isEnroll" data-name="{{item.userName}}"
+      data-index="{{index}}">
+        <view slot="right-icon" wx:if="{{!item.hasEnroll}}">
+          <van-tag type="warning">未录取</van-tag>
+        </view>
+        <view slot="right-icon" wx:if="{{item.hasEnroll}}">
+          <van-tag type="success">已录取</van-tag>
+        </view>
+      </van-cell>
+    </view>
+  </van-popup>
+
+  <van-cell title="活动签到" icon="records-o" is-link bind:click="showSignin"/>
+
+  <van-popup show="{{ showSignin }}" bind:close="closeSignin" round position="bottom" custom-style="height: 80%">
+    <view wx:for="{{participant}}" wx:key="index">
+      <van-cell title="{{item.userName}}" bind:tap="isSignin" data-name="{{item.userName}}" data-index="{{index}}">
+        <view slot="right-icon" wx:if="{{!item.hasSignin}}">
+          <van-tag type="warning">未签到</van-tag>
+        </view>
+        <view slot="right-icon" wx:if="{{item.hasSignin}}">
+          <van-tag type="success">已签到</van-tag>
+        </view>
+      </van-cell>
+    </view>
+  </van-popup>
+  <view class="delBox" bind:tap="showEvaluate2" style="background-color: #2e54a1;" wx:if="{{state == 5}}">
+    <text>发放时间币</text>
+  </view>
+    <van-popup show="{{ showEvaluate2 }}" bind:close="closeEvaluate2" round position="bottom" custom-style="height: 80%">
+      <van-cell-group>
+        <view style="height: 150rpx;">
+          <van-field
+            model:value="{{ evaluate2 }}"
+              placeholder="请输入评价"
+              border="{{ false }}"
+              bind:change="changeEvaluate2"
+              autosize
+              type="textarea"
+          />
+        </view>
+      </van-cell-group>
+      <van-cell title="评分">
+        <view slot="right-icon" style="width: 525rpx;">
+          <van-rate  value="{{starNum}}" bind:change="changestarNum" color="#ffd21e"/>
+        </view>
+      </van-cell>
+      <van-cell-group>
+        <van-field
+        model:value="{{ Payword }}"
+        type="password"
+        label="密码"
+        placeholder="请输入密码"
+        border="{{ false }}"
+        clearable
+        />
+      </van-cell-group>
+      <view class="delBox" bind:tap="closeEvaluate2" style="background-color: #2e54a1;width:686rpx;position:fixed; bottom:20rpx;">
+      <text>发放时间币</text>
+      </view>
+    </van-popup>
+
+
+  <view class="delBox" bind:tap="showChange" style="background-color: #2e54a1;" wx:if="{{state <=1}}">
+    <text>修改活动</text>
+  </view>
+  <van-popup show="{{ showChange }}" bind:close="closeChange" round position="bottom" custom-style="height: 80%">
+    <van-cell title="修改照片" center="true" border="{{false}}">
+      <van-uploader 
+      slot="right-icon"
+      file-list="{{userImg}}" 
+      deletable="{{true}}"
+      max-count="1"
+      />
+    </van-cell>
+    <van-cell-group>
+      <van-field
+        model:value="{{Fname}}"
+        label="活动名称"
+        placeholder="{{name}}"
+      />
+    </van-cell-group>
+    <van-cell-group>
+      <van-field
+        model:value="{{Fprice}}"
+        label="时间币报酬"
+        placeholder="{{price}}"
+      />
+    </van-cell-group>
+    <van-cell-group>
+      <van-field
+        model:value="{{Fnop}}"
+        label="参与人数"
+        placeholder="{{nop}}"
+      />
+    </van-cell-group>
+    <van-cell-group>
+      <van-field
+        model:value="{{Ftype}}"
+        label="活动类型"
+        placeholder="{{type}}"
+      />
+    </van-cell-group>
+    <van-cell-group>
+      <van-field
+        model:value="{{FaTime}}"
+        label="活动时间"
+        placeholder="{{aTime}}"
+      />
+    </van-cell-group>
+    <van-cell-group>
+      <van-field
+        model:value="{{FcTime}}"
+        label="开展时间"
+        placeholder="{{cTime}}"
+      />
+    </van-cell-group>
+    <van-cell-group>
+      <van-field
+        model:value="{{Faddress}}"
+        label="活动区域"
+        placeholder="{{address}}"
+      />
+    </van-cell-group>
+    <van-cell-group>
+      <van-field
+        model:value="{{Fint}}"
+        label="活动介绍"
+        placeholder="{{int}}"
+      />
+    </van-cell-group>
+    <van-cell-group>
+      <van-field
+        model:value="{{Fprincipal}}"
+        label="负责人"
+        placeholder="{{principal}}"
+      />
+    </van-cell-group>
+    <van-cell-group>
+      <van-field
+        model:value="{{Ftel}}"
+        label="联系方式"
+        placeholder="{{tel}}"
+      />
+    </van-cell-group>
+    <view style="display: flex;align-items: center;position: fixed;bottom:20rpx;width: 750rpx;height: 120rpx;">
+      <view class="delBox"  style="background-color: #2e54a1;width: 685rpx;" bind:tap="changeActivity">
+      <text>确认修改</text>
+      </view>
+      <view style="height: 120rpx;"></view>
+    </view>
+  </van-popup>
+
+  <view class="delBox" bind:tap="delActivity"  wx:if="{{state <=1}}">
+    <text>删除活动</text>
+  </view>
+</view>
+<view class="fixed-bottom" style="padding-bottom:{{bottomLift}}px"/>
+
+<view wx:if="{{userID!==AdminID}}">
+  <view wx:if="{{state <= 4}}">
+    <view class="service">
+      <view style="position: absolute;right: 50rpx;" ><van-icon name="service-o"size="60rpx" bind:click="openService"/></view>
+      <view style="position: absolute;right: 285rpx;background-color: white;width: 180rpx;height: 80rpx;display: flex;align-items: center;justify-content: center;flex-direction:row;border-radius: 40rpx;box-shadow: 0 0 20rpx rgba(0, 0, 0, 0.15);border: 1px solid rgba(0, 0, 0, 0.15);" bind:tap="leaveActivity" wx:if="{{state == 2}}">
+        <text style="font-size: 32rpx;">活动请假</text>
+      </view> 
+    </view>
+  </view>
+</view>
+
+
+
+
+<!-- 弹出提示 -->
+<van-dialog id="van-dialog" />
+<!-- 轻提示 -->
+<van-toast id="van-toast" />
+

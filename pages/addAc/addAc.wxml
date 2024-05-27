@@ -1,0 +1,143 @@
+<!--pages/addAc/addAc.wxml-->
+<van-cell-group>
+  <van-field
+    type="textarea"
+    autosize
+    label="活动名称"
+    model:value="{{ name }}"
+    placeholder="请输入活动名称"
+    border="{{ false }}"
+  />
+</van-cell-group>
+
+<van-cell-group>
+  <van-field
+    label="活动负责人"
+    model:value="{{ principal }}"
+    placeholder="请输入活动负责人"
+    border="{{ false }}"
+  />
+</van-cell-group>
+
+<van-cell-group>
+  <van-field
+    type="textarea"
+    autosize
+    label="联系方式"
+    model:value="{{ tel }}"
+    placeholder="请输入联系方式"
+    border="{{ false }}"
+  />
+</van-cell-group>
+
+<van-cell-group>
+  <van-field
+    type="textarea"
+    autosize
+    label="活动地点"
+    model:value="{{ address }}"
+    placeholder="请输入活动地点"
+    border="{{ false }}"
+  />
+</van-cell-group>
+
+<van-cell-group>
+  <van-field
+    type="textarea"
+    autosize
+    label="活动介绍"
+    model:value="{{ int }}"
+    placeholder="请输入活动介绍"
+    border="{{ false }}"
+  />
+</van-cell-group>
+
+<van-field
+  value="{{ fieldValue }}"
+  readonly
+  label="活动类型"
+  placeholder="请选择活动类型"
+  bind:tap="clickType"
+/>
+<van-popup show="{{ showType }}" round position="bottom" >
+  <van-cascader
+    wx:if="{{ showType }}"
+    value="{{ type }}"
+    title="请选择活动类型"
+    options="{{ options }}"
+    bind:close="closeType"
+    bind:finish="finishType"
+  />
+</van-popup>
+
+
+<van-cell 
+  title="活动时间" 
+  value="{{ dateActivityTime }}" 
+  bind:click="displayActivityTime" 
+  is-link 
+/>
+
+<van-calendar
+  color="#0aa858"
+  show-confirm="{{ false }}"
+  show="{{ showActivityTime }}"
+  type="range"
+  bind:close="closeActivityTime"
+  bind:confirm="confirmActivityTime"
+/>
+<van-cell title="开展时间"  is-link bind:click="showPopup1" value="{{cTime}}"/>
+
+<van-popup show="{{ showPopup1 }}" bind:close="closePopup1" round position="bottom" custom-style="height: 70%" >
+  <van-datetime-picker
+  type="time"
+  value="{{ startTime }}"
+  min-hour="{{ minHour1 }}"
+  max-hour="{{ maxHour1 }}"
+  bind:input="inputStartTime"
+  bind:confirm="startTimeConfirm"
+  bind:cancel="cTimeClear"
+/>
+</van-popup>
+
+<van-popup show="{{ showPopup2 }}" bind:close="closePopup2" round position="bottom" custom-style="height: 70%">
+  <van-datetime-picker
+  type="time"
+  value="{{ endTime }}"
+  min-hour="{{ minHour2 }}"
+  max-hour="{{ maxHour2 }}"
+  bind:input="inputEndTime"
+  bind:confirm="closePopup2"
+  bind:cancel="cTimeClear"
+/>
+</van-popup>
+<van-cell title="活动人数">
+  <van-stepper step="1" slot="right-icon" value="{{ nop }}" integer  bind:change="onChangeNop"/>
+</van-cell>
+
+<van-cell title="时间币报酬">
+  <van-stepper step="1" slot="right-icon" value="{{ price }}" integer  bind:change="onChangePrice"/>
+</van-cell>
+
+
+
+<van-cell title="活动照片" center="true">
+  <van-uploader 
+  slot="right-icon"
+  file-list="{{ fileList }}" 
+  deletable="{{ true }}"
+  max-count="1"
+/>
+</van-cell>
+
+<view class="box" style="position:fixed;bottom:{{bottomLift}}px;width:100%;"> 
+  <view class="box1" style="background-color: gainsboro;" bind:tap="clearAddAC">
+    <text style="font-size: 40rpx;padding: 10rpx;">清除</text>
+    <van-toast id="van-toast" />
+  </view>
+  <view class="box1" style="background-color: #2d85f0;" bind:tap="upLoadActivity">
+    <text style="font-size: 40rpx;padding: 10rpx;color: white;">创建活动</text>
+    <van-toast id="van-toast" />
+  </view>
+</view>
+

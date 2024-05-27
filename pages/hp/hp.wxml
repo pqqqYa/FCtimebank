@@ -1,0 +1,191 @@
+<!--pages/hp/hp.wxml-->
+<view style="height: {{navBarHeight}}px;">
+  <view style="height: {{menuTop}}px;">
+  </view>
+  <view style="height: {{menuHeight}}px;" class="topBar">
+    <image src="/images/logo-0.png" mode="widthFix"/>
+  </view> 
+  </view>
+  <view style="height: 20rpx;"></view>
+  <!------------------------------------------------------------------------------------------------------>
+  <view style="display: flex;flex-direction: column;align-items: center;">
+    <!-- <view style="background: -webkit-linear-gradient(top,#6ba7ec,#b0cdee,#ecf3fb);border-radius: 16rpx;"> -->
+      <view style="background:#6ba7ec;border-radius: 16rpx;">
+      <view class="swiperitem-title" style="border-top-left-radius: 16rpx;border-top-right-radius: 16rpx;">
+        <text style="left: 110rpx;color: #124f7b;font-weight: bold;">Txn哈希</text>
+        <text style="left: 365rpx;color: #124f7b;font-weight: bold;">状态</text>
+        <text style="left: 445rpx;color: #124f7b;font-weight: bold;">交易额</text>
+        <text style="left: 570rpx;color: #124f7b;font-weight: bold;">时间</text>
+      </view>
+      <swiper vertical="ture" display-multiple-items="4" interval="2000" 	circular="ture" 	autoplay="ture"  style="width: 688rpx;">
+        <swiper-item style="display: flex;flex-direction: column;align-items: center;" wx:for="{{12}}" >
+          <view class="swiperitem" style="border-radius:16rpx;">
+            <view style="width: 30rpx;"></view>
+            <view class="HXtext">a3a94e14a29d26d9b93e85594e450a9570147a364b1046006628a486d046e0f0</view>
+            <view style="width: 30rpx;"></view>
+            <view class="textBox">支付</view>
+            <view class="textBox">25币</view>
+            <view class="textBox" style="width: 150rpx;">12秒前</view>
+          </view>
+        </swiper-item>
+      </swiper>
+    <view class="swiperitem-title" style="height: 5rpx;"></view>
+  </view>
+
+</view>
+
+<!-- ---------------------------------------------------------------------------------------------- -->
+<view style="height: 10rpx;"></view>
+
+<view style="display: flex;flex-direction: column;align-items: center;">
+  <view style="height: 150rpx;width: 688rpx;border-radius: 16rpx;display: flex;justify-content: center;">
+    <view class="fbox" style="background-color: #f8e4e3;border-radius: 16rpx;">
+      <text style="color: #851321;">公益捐赠</text>
+      <image src="/images/handshake.png" mode="widthFix"/>
+    </view>
+    <view style="width: 10rpx;"/>
+    <view class="fbox" style="background-color: #dbeefe;border-radius: 16rpx;">
+      <text style="color: #74ace3;">联系我们</text>
+      <image src="/images/inform.png" mode="widthFix"/>
+    </view>
+  </view>
+</view>
+<view style="height: 10rpx;"></view>
+<view style="display: flex;flex-direction: column;align-items: center;">
+  <view style="height: 150rpx;width: 688rpx;border-radius: 16rpx;display: flex;justify-content: center;">
+    <view class="fbox" style="background-color: #fbf2e1;border-radius: 16rpx;">
+      <text style="color: #6f4c0e;">兑换中心</text>
+      <image src="/images/exchange.png" mode="widthFix"/>
+    </view>
+    <view style="width: 10rpx;"/>
+    <view class="fbox" style="background-color: #d1f4ee;border-radius: 16rpx;">
+      <text style="color: #114a40;">新手指导</text>
+      <image src="/images/guide.png" mode="widthFix"/>
+    </view>
+  </view>
+</view>
+
+<view style="height: 15rpx;"></view>
+
+<!----------------------------------------------------------------------------------------------------------- -->
+<view style="display: flex;align-items: center;margin: 10rpx;">
+  <view style="width: 20rpx;"></view>
+  <view>
+    <text style="font-size: 40rpx;font-weight: 650;">精选活动</text>
+  </view>
+  <view style="width: 470rpx;"></view>
+  <view bind:tap="toAclist">
+    <text style="font-size: 25rpx;color: #808080;">更多</text>
+    <van-icon name="arrow" size="25rpx"/>
+  </view>
+</view>
+<view style="height: 10rpx;"></view>
+
+<view style="display: flex;flex-direction: column;align-items: center;">
+  <view 
+  wx:for="{{fakeActivityList}}" 
+  wx:key="index" bind:tap="toActivityInfo" 
+  data-id="{{item.id}}"
+  data-adminid="{{item.AdminID}}" 
+  data-name="{{item.name}}"
+  data-type="{{item.type}}"
+  data-nop="{{item.nop}}"
+  data-atime="{{item.aTime}}"
+  data-ctime="{{item.cTime}}"
+  data-address="{{item.address}}"
+  data-price="{{item.price}}"
+  data-principal="{{item.principal}}"
+  data-tel="{{item.tel}}"
+  data-img="{{item.img}}"
+  data-int="{{item.int}}"
+  data-participant="{{item.participant}}"
+  data-isfull="{{item.isfull}}"
+  data-state="{{item.state}}"
+  >
+    <view class="box">
+      <image src="{{item.img}}" mode="widthFix"/>
+      <view style="height: 12rpx;background-color: white;"></view>
+      <view style="display: flex;flex-direction: row;border: 1px solid white;width: 470rpx;background-color: white;">
+      <view style="border: 1px solid white;width: 436rpx;height: 50rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+        <text style="font-size: 40rpx;font-weight: 550;">{{item.name}}</text>
+      </view>
+      <view style="width: 180rpx;display: flex;flex-direction: column;align-items: center;">
+        <van-tag round  type="success" wx:if="{{item.isfull==0}}">报名中</van-tag>
+        <van-tag round  type="warning" wx:if="{{item.isfull==1}}">已满</van-tag>    
+        <van-tag round  type="warning" wx:if="{{item.isfull==2}}">已结束</van-tag>
+      </view>
+    </view>
+    <view style="height: 40rpx;background-color: white;">
+      <text style="color: #808080;font-size:25rpx">报酬：{{item.price}}/人</text>
+    </view>
+    <view style="height: 40rpx;background-color: white;">
+      <text style="color: #808080;font-size:25rpx">{{item.aTime}}</text>
+    </view>
+    <view style="width:460rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+      <text style="color: #808080;font-size: 25rpx">{{item.address}}</text>
+    </view>
+    </view>
+    <view style="height: 15rpx;"></view>
+  </view>
+</view>
+<!----------------------------------------------------------------------------------------------------------- -->
+<view style="display: flex;align-items: center;margin: 10rpx;">
+  <view style="width: 20rpx;"></view>
+  <view><text style="font-size: 40rpx;font-weight: 650;">精选培训</text></view>
+  <view style="width: 480rpx;"></view>
+  <view bind:tap="toTrainlist">
+    <text style="font-size: 25rpx;color: #808080;" >更多</text>
+    <van-icon name="arrow" size="25rpx"/>
+  </view>
+</view>
+<view style="height: 10rpx;"></view>
+
+<view style="display: flex;flex-direction: column;align-items: center;">
+  <view 
+  wx:for="{{fakeTrainList}}" 
+  wx:key="index" bind:tap="toActivityInfo" 
+  data-id="{{item.id}}"
+  data-adminid="{{item.AdminID}}" 
+  data-name="{{item.name}}"
+  data-type="{{item.type}}"
+  data-nop="{{item.nop}}"
+  data-atime="{{item.aTime}}"
+  data-ctime="{{item.cTime}}"
+  data-address="{{item.address}}"
+  data-price="{{item.price}}"
+  data-principal="{{item.principal}}"
+  data-tel="{{item.tel}}"
+  data-img="{{item.img}}"
+  data-int="{{item.int}}"
+  data-participant="{{item.participant}}"
+  data-isfull="{{item.isfull}}"
+  data-state="{{item.state}}"
+  >
+    <view class="box">
+      <image src="{{item.img}}" mode="widthFix"/>
+      <view style="height: 12rpx;background-color: white;"></view>
+      <view style="display: flex;flex-direction: row;border: 1px solid white;width: 470rpx;background-color: white;">
+      <view style="border: 1px solid white;width: 436rpx;height: 50rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+        <text style="font-size: 40rpx;font-weight: 550;">{{item.name}}</text>
+      </view>
+      <view style="width: 180rpx;display: flex;flex-direction: column;align-items: center;">
+        <van-tag round  type="success" wx:if="{{item.isfull==0}}">报名中</van-tag>
+        <van-tag round  type="warning" wx:if="{{item.isfull==1}}">已满</van-tag>    
+        <van-tag round  type="warning" wx:if="{{item.isfull==2}}">已结束</van-tag>
+      </view>
+    </view>
+    <view style="height: 42rpx;background-color: white;">
+      <text style="color: #808080;font-size:25rpx;height: 30rpx;">培训导师：{{item.principal}}</text>
+    </view>
+    <view style="height: 40rpx;background-color: white;">
+      <text style="color: #808080;font-size:25rpx">{{item.aTime}}</text>
+    </view>
+    <view style="width:460rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+      <text style="color: #808080;font-size: 25rpx">{{item.address}}</text>
+    </view>
+    </view>
+    <view style="height: 10rpx;"></view>
+  </view>
+</view>
+
+

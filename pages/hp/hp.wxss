@@ -1,0 +1,80 @@
+.swiperitem-title{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 688rpx;
+  height: 60rpx;
+  position: relative;
+}
+.swiperitem-title text{
+  position: absolute;
+  display: inline;
+  float: right;
+}
+
+.swiperitem{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: rgba(255,255,255,0.6);
+  width: 660rpx;
+  height: 60rpx;
+}
+.HXtext{ 
+  width: 340rpx;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+.textBox{
+  width: 100rpx;
+}
+.topBar{
+  display: flex;
+  position: relative;
+}
+.topBar image{
+  position: absolute;
+  width: 146px;
+  left: 30px;
+}
+
+.fbox{
+  height: 150rpx;
+  width: 344rpx;
+  display: flex;
+  position: relative;
+}
+
+.fbox  image{
+  position: absolute;
+  width: 120rpx;
+  display: inline;
+  float: right;
+  top: 10px;
+  right: 5px;
+}
+.fbox  text{
+  position: absolute;
+  display: inline;
+  float: right;
+  top: 10px;
+  left: 10px;
+  font-size: 45rpx;
+}
+
+.box{
+  display: block;
+  border: 1px solid white;
+  border-radius: 20rpx;
+  height: 200rpx;
+  width: 688rpx;
+  background-color: white;
+  /* box-shadow: 0 0 20rpx rgba(0, 0, 0, 0.15); */
+}
+.box image{
+  width: 180rpx;
+  float: left;
+  border-radius: 20rpx;
+  margin: 10rpx;
+}

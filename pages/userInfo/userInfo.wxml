@@ -1,0 +1,80 @@
+<!--pages/userInfo/userInfo.wxml-->
+<van-field
+    value="{{userID}}"
+    label="用户ID"
+    disabled
+    border="{{ false }}"
+  />
+
+  <van-field
+    model:value="{{userMobile}}"
+    label="联系电话"
+    disabled
+    border="{{ false }}"
+/>
+
+<van-field
+    value="{{userAge}}"
+    label="年龄"
+    disabled
+    border="{{ false }}"
+/>
+
+<van-field
+    value="{{userSex}}"
+    label="性别"
+    disabled
+    border="{{ false }}"
+/>
+<van-field
+    value="{{userIDcard}}"
+    label="身份证号"
+    disabled
+    border="{{ false }}"
+/>
+
+<van-field
+    value="{{userOrganization}}"
+    label="组织"
+    disabled
+    border="{{ false }}"
+/>
+
+<van-cell title="修改头像" center="true" border="{{false}}">
+  <van-uploader 
+  slot="right-icon"
+  file-list="{{ userImg }}" 
+  deletable="{{ true }}"
+  max-count="1"
+/>
+</van-cell>
+<van-field
+    model:value="{{userName}}"
+    label="昵称"
+    border="{{ false }}"
+/>
+
+
+
+<van-field
+    model:value="{{userArea}}"
+    label="地址"
+    border="{{ false }}"
+/>
+
+<van-field
+    model:value="{{userProfession}}"
+    label="职业"
+    border="{{ false }}"
+/>
+
+<van-field
+    model:value="{{userInt}}"
+    label="个人介绍"
+    border="{{ false }}"
+/>
+
+<van-toast id="van-toast" />
+<view class="Box" bind:tap="login">
+<text>修改信息</text>
+</view>
